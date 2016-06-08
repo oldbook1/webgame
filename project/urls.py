@@ -21,5 +21,5 @@ urlpatterns = patterns('',
     url(r'^admin/', admin.site.urls),
 	url(r'^$', startpage, name='start'),
 	url(r'^game', game, name='game'),
-	url(r'^waits', waits, name='waits'),
+	#url(r'^waits', waits, name='waits'),
 )

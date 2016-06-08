@@ -8,27 +8,49 @@ import time
 
 
 def startpage(request):
-	if request.method == "POST":
+	if request.method == "POST":  
 		form = Form(request.POST)
-		nicnameList = player.objects.all()
-		if len(nicnameList) < 2 :
-			if form.is_valid():
+		if form.is_valid():
+			room = form.cleaned_data.get("room")
+			if room == 0:    
+				nicnameList = player.objects.all() 
+				room_cheker = 0             
+				for i in range(1,100):     
+					for nic in nicnameList :
+						if nic.room == i:   
+							room_cheker += 1 
+						if room_cheker ==2:  
+							room_cheker = 0  
+							break            
+					if room_cheker != 0:    
+						room_cheker = 0   
+						form.room = i      
+						break             
 				form.save()
-				for i in range(1000):
+				for i in range(1000):  
 					nicnameList = player.objects.all()
-					if len(nicnameList) >= 2:
-						return render(request,"game.html", {"form":form ,"nicnameList":nicnameList,})
+					for nic in nicnameList :
+						if nic.room == room :
+							room_cheker += 1
+						if room_cheker == 2:
+							return render(request,"game.html", {"form":form ,"nicnameList":nicnameList,})
+					room_cheker = 0
 					time.sleep(2)
-		if len(nicnameList) >= 2 :
-			return render(request,"waits.html",{"form":form})
-
+			if room != 0:
+				room_cheker = 0
+				form.save()
+				for i in range(1000): 
+					nicnameList = player.objects.all()
+					for nic in nicnameList :
+						if nic.room == room :
+							room_cheker += 1
+						if room_cheker == 2:
+							return render(request,"game.html", {"form":form ,"nicnameList":nicnameList,})
+					room_cheker = 0
+					time.sleep(2)
+        
 	form = Form()
-
 	return render(request,"home.html",{ "form":form, })
 
 def game(request):
 	return render(request,"game.html")	
-
-
-def waits(request):
-	return render(request,"waits.html",{"form":form})

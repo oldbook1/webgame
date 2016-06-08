@@ -1,0 +1,9 @@
+<html>
+<body>
+<h1> is full.you should wait for playing game. you want play? <h1>
+<form method='POST' action=''>{% csrf_token %}
+{{form.as_p}}
+<input type='submit' value='매칭'/input>
+</form>
+</body>
+</html>

@@ -5,8 +5,8 @@
 	<title>write</title>
 </head>
 <body>
-{% for player in nicnamelist %}
-{{ player.nicname }}
+{% for player in form %}
+{{ player.room }}
 {% endfor %}
 </body>
 </html>
