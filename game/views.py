@@ -11,21 +11,23 @@ def startpage(request):
 	if request.method == "POST":  
 		form = Form(request.POST)
 		if form.is_valid():
-			room = form.cleaned_data.get("room")
-			if room == 0:    
+			room = form.cleaned_data['room']
+			if room == 0:
 				nicnameList = player.objects.all() 
 				room_cheker = 0             
-				for i in range(1,100):     
+				for i in range(1,100):
+					room = 1
 					for nic in nicnameList :
 						if nic.room == i:   
 							room_cheker += 1 
-						if room_cheker ==2:  
-							room_cheker = 0  
+						if room_cheker ==2:   
 							break            
-					if room_cheker != 0:    
+					if room_cheker < 2 :    
 						room_cheker = 0   
-						form['room'] = i      
-						break             
+						room = i     
+						break
+					room_cheker = 0
+				room = 1
 				form.save()
 				for i in range(1000):  
 					nicnameList = player.objects.all()
@@ -44,8 +46,10 @@ def startpage(request):
 					for nic in nicnameList :
 						if nic.room == room :
 							room_cheker += 1
-						if room_cheker == 2:
-							return render(request,"game.html", {"form":form ,"nicnameList":nicnameList,})
+					if room_cheker == 2:
+						return render(request,"game.html", {"form":form ,"nicnameList":nicnameList,})
+					if room_cheker >2:
+						break
 					room_cheker = 0
 					time.sleep(2)
         
