@@ -58,13 +58,13 @@ def game2(request):
 			if other_list[i] == guess_number[i]:
 				ball--
 				strike++
-		states = str(strike) + "스트라이커" + str(ball) + "볼"
-		states 디비에 저장
+		states = str(strike) + "strike " + str(ball) + "ball"
+		states.save() 
 
 		if strike==4:
 			return render(request, "win.html")
 		else:
-			return render(requst, "game2.html", {form을 리턴하면 방정보같은 쓸데없는게 나갈거같지만 일단 form을 리턴})
+			return render(requst, "game2.html", {form})
 		"""
 
 	return render(request,"game2.html")	
