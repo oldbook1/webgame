@@ -20,6 +20,10 @@ from game.views import *
 urlpatterns = patterns('',
     url(r'^admin/', admin.site.urls),
 	url(r'^$', startpage, name='start'),
+<<<<<<< HEAD
+	url(r'^game/(?P<room>\d+)/$', game, name='game'),
+=======
 	url(r'^game', game, name='game'),
-	url(r'^waits', waits, name='waits'),
+>>>>>>> origin/master
+	#url(r'^waits', waits, name='waits'),
 )

@@ -5,8 +5,13 @@
 	<title>write</title>
 </head>
 <body>
+<<<<<<< HEAD
+{% for player in nicnameList %}
+{{ player.nicname }}
+=======
 {% for player in form %}
 {{ player.room }}
+>>>>>>> origin/master
 {% endfor %}
 </body>
 </html>
