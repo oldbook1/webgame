@@ -13,15 +13,15 @@ class player(models.Model):
 
 
 class player_num(models.Model):
-	my_number = models.IntegerField(null = False , default = 1234, unique = True)
+	mynumber = models.IntegerField(null = False , default = 123, unique = True)
 	room = models.IntegerField(default = 0 , null=False)
 
 	def __unicode__(self):
-		return self.my_number
+		return self.mynumber
 
 
 class number_room1(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -29,7 +29,7 @@ class number_room1(models.Model):
 
 
 class number_room2(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -37,7 +37,7 @@ class number_room2(models.Model):
 
 
 class number_room3(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -45,7 +45,7 @@ class number_room3(models.Model):
 
 
 class number_room4(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -53,7 +53,7 @@ class number_room4(models.Model):
 
 
 class number_room5(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -61,7 +61,7 @@ class number_room5(models.Model):
 
 
 class number_room6(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -69,7 +69,7 @@ class number_room6(models.Model):
 
 
 class number_room7(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -77,7 +77,7 @@ class number_room7(models.Model):
 
 
 class number_room8(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -85,7 +85,7 @@ class number_room8(models.Model):
 
 
 class number_room9(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):
@@ -93,7 +93,7 @@ class number_room9(models.Model):
 
 
 class number_room10(models.Model):
-	guess_number = models.IntegerField(null = False , default = 1234, unique = True)
+	guess_number = models.IntegerField(null = False , default = 123, unique = True)
 	number_judgment  = models.CharField(max_length=5,null = False )
 
 	def __unicode__(self):

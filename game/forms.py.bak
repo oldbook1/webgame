@@ -18,108 +18,108 @@ class Form(forms.ModelForm):
 class Form_mynum(forms.ModelForm):
 	class Meta:
 		model = player_num 
-		fields = ['my_number','room']
+		fields = ['mynumber','room']
 
-	def clean_my_number(self):
-		nicname = self.cleaned_data.get('my_number')
-		return my_number
+	def clean_mynumber(self):
+		nicname = self.cleaned_data.get('mynumber')
+		return mynumber
 
 
 class Form_numberList_room1(forms.ModelForm):
 	class Meta:
 		model = number_room1
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room2(forms.ModelForm):
 	class Meta:
 		model = number_room2
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room3(forms.ModelForm):
 	class Meta:
 		model = number_room3
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room4(forms.ModelForm):
 	class Meta:
 		model = number_room4
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room5(forms.ModelForm):
 	class Meta:
 		model = number_room5
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room6(forms.ModelForm):
 	class Meta:
 		model = number_room6
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room7(forms.ModelForm):
 	class Meta:
 		model = number_room7
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room8(forms.ModelForm):
 	class Meta:
 		model = number_room8
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room9(forms.ModelForm):
 	class Meta:
 		model = number_room9
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number
 
 
 class Form_numberList_room10(forms.ModelForm):
 	class Meta:
 		model = number_room10
-		fields = ['choose_number','number_judgment']
+		fields = ['guess_number','number_judgment']
 	
-	def clean_choose_number(self):
-		choose_number = self.cleaned_data.get('choose_number')
-		return choose_number
+	def clean_guess_number(self):
+		guess_number = self.cleaned_data.get('guess_number')
+		return guess_number

@@ -71,58 +71,66 @@ def game(request, room):
 	nicnameListAll = player.objects.all()
 	my_numberListAll = player_num.objects.all()
 	nicnameList = {}
+	nicnameList = dict()
 	for nic in nicnameListAll:
 		if nic.room == room :
-			d += nic
+			nicnameList += nic
 	my_numberList = {}
+	my_numberList = dict()
 	for number in my_numberListAll:
 		if number.room == room :
-			c += number
+			my_numberList += number
 	
 	if len(my_numberList) < 2:
 		if request.method == "POST":
 			form_num = Form_mynum(request.POST)
-			my_number = form_num.cleaned_data.get("my_number")
-			form_num = Form_mynum(
-				{'my_number' : my_number,'room' : room,}
-			)
-			form_num.save()
-			return render(request, "game2.html", nicnameList,{'form_num':form_num} )
-
-		return render(request,"game.html", nicnameList)
+			if form_num.is_valid():
+				mynumber = form_num.cleaned_data['mynumber']
+				if mynumber > 123 :# && my_number < 987
+					if mynumber/100 != mynumber/10: # && (100,10), &&(100,1),&& (10,1)
+						form_num = Form_mynum(
+							{'mynumber' : mynumber,'room' : room,}
+						)
+						form_num.save()
+						return render(request, "game2.html", {"nicnameList":nicnameList,"form_num":form_num,} )
+				form_num = Form_mynum()
+				return render(request,"game.html", {"nicnameList":nicnameList,"my_numberList":my_numberList,})
 
 	if len(my_numberList) == 2:
 		if request.method == "POST":
-			form_guess = Form(request.POST)
-			guess_number = form.cleanead_data.get("guess_number")
+			form_guess = Form_numberList_room1(request.POST)
+			guess_number = form_guess.cleanead_data.get("guess_number")
 			#otehr_number = player2.my_number
 			#ball = 0, strike =0
-			a = guess_number // 1000; guess_number -= a * 1000;
-			b = guess_number // 100; guess_number -= b * 100;
-			c = guess_number // 10; guess_number -= c * 10;
-			d = guess_number;
-			guess_list = [a,b,c,d]
+			a = guess_number // 100; guess_number -= b * 100;
+			b = guess_number // 10; guess_number -= c * 10;
+			c = guess_number;
+			guess_list = [a,b,c]
 			"""
-			e = other_number // 1000; other_number -= e * 1000;
-			f = other_number // 100; other_number -= g * 100;
-			g = other_number // 10; other_number -= h * 10;
-			h = other_number;
-			other_list = [e, f, g, h]
-			for i in range(4):
-				for j in range(4):
+			e = other_number // 100; other_number -= g * 100;
+			f = other_number // 10; other_number -= h * 10;
+			g = other_number;
+			other_list = [e, f, g]
+			for i in range(3):
+				for j in range(3):
 					if other_list[i] == guess_number[j]:
 						ball++
-			for in in range(4):
+			for in in range(3):
 				if other_list[i] == guess_number[i]:
 					ball--
 					strike++
-			states = str(strike) + "strike " + str(ball) + "ball"
-			states.save()
+			number_judgment = str(strike) + "strike " + str(ball) + "ball"
+			form_guess = Form_numberList_room1(
+					{'my_number' : my_number,'room' : room,}
+			)
+			form_guess.save()
 
-			if strike==4:
+			if strike==3:
 				return render(request, "win.html")
 			else:
 				return render(requst, "game2.html", {"form":form})
 			"""
-
-	return render(request,"game2.html", nicnameList)
+		form_guess = Form_numberList_room1()
+		return render(request,"game2.html", {"nicnameList":nicnameList,"form_guess":form_guess,})
+	form_num = Form_mynum()
+	return render(request,"game.html", {"nicnameList":nicnameList,"form_num":form_num,})

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>write</title>
+</head>
+<body>
+{% for number in my_numberList %}
+{{number.mynumber}}
+{% endfor %}
+{% for nic in nicnameList %}
+{{nic.nicname}} || {{nic.room}}
+{% endfor %}
+
+</body>
+</html>

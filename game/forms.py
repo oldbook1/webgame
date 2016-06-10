@@ -18,11 +18,11 @@ class Form(forms.ModelForm):
 class Form_mynum(forms.ModelForm):
 	class Meta:
 		model = player_num 
-		fields = ['my_number','room']
+		fields = ['mynumber','room']
 
-	def clean_my_number(self):
-		nicname = self.cleaned_data.get('my_number')
-		return my_number
+	def clean_mynumber(self):
+		mynumber = self.cleaned_data.get('mynumber')
+		return mynumber
 
 
 class Form_numberList_room1(forms.ModelForm):
