@@ -5,12 +5,10 @@
 	<title>write</title>
 </head>
 <body>
-{% for player in nicnameList %}
-<<<<<<< HEAD
-{{ player.nicname }} | {{ player.room }}
-=======
-{{player.nicname}}|{{player.room}}
->>>>>>> origin/master
-{% endfor %}
+<form method='POST' action=''>
+{{form_num.as_p}}
+{% csrf_token %}
+<input type='submit' value='gogo'/input>
+</form>
 </body>
 </html>
