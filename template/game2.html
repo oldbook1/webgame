@@ -5,12 +5,19 @@
 	<title>write</title>
 </head>
 <body>
+<form method='POST' action=''>
+{{form_guess.as_p}}
+{% csrf_token %}
+<input type='submit' value='gogo2'/input>
+</form>
 {% for number in my_numberList %}
 {{number.mynumber}}
 {% endfor %}
 {% for nic in nicnameList %}
 {{nic.nicname}} || {{nic.room}}
 {% endfor %}
-
+{% for guess in form_guess %}
+{{nic.nicname}} || {{nic.room}}
+{% endfor %}
 </body>
 </html>
