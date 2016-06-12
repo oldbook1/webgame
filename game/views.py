@@ -121,8 +121,8 @@ def game(request, room00, cnt00):
 	if len(my_numberList) == 2:
 		if request.method == "POST":
 			form_guess = Form_numberList_room(request.POST)
-			if form_guess.is_vaild():
-				guess_number = form_guess.cleanead_data['guess_number']
+			if form_guess.is_valid():
+				guess_number = form_guess.cleaned_data['guess_number']
 				for my_num in my_numberList:
 					if my_num.cnt != int(cnt00):
 						other_number = my_num.mynumber
@@ -134,14 +134,14 @@ def game(request, room00, cnt00):
 				b = guess_number / 10 
 				guess_number -= b * 10
 				c = guess_number
-				guess_list = {a,b,c}
+				guess_list = [a,b,c]
 	
 				e = other_number / 100
 				other_number -= e * 100
 				f = other_number / 10 
 				other_number -= f * 10
 				g = other_number
-				other_list = {e, f, g}
+				other_list = [e, f, g]
 
 				for i in range(3):
 					for j in range(3):
@@ -152,7 +152,7 @@ def game(request, room00, cnt00):
 						ball-= 1
 						strike+= 1
 
-				guess_number = form_guess.cleanead_data['guess_number']
+				guess_number = form_guess.cleaned_data['guess_number']
 				form_guess = Form_numberList_room(
 						{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
 				)
