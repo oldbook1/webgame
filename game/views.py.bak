@@ -122,49 +122,50 @@ def game(request, room00, cnt00):
 			form_guess = Form_numberList(request.POST)
 			if form_guess.is_valid():
 				guess_number = form_guess.cleaned_data['guess_number']
-				if guess_number/100 != (mynumber-(mynumber/100)*100)/10:
-					if mynumber/100 != mynumber-((mynumber/10)*10):
-						if (mynumber-(mynumber/100)*100)/10 != mynumber-((mynumber/10)*10):
-							for my_num in my_numberList:
-								if my_num.cnt != int(cnt00):
-									other_number = my_num.mynumber
+				if 122 < guess_number< 988:
+					if guess_number/100 != (guess_number-(guess_number/100)*100)/10:
+						if guess_number/100 != guess_number-((guess_number/10)*10):
+							if (guess_number-(guess_number/100)*100)/10 != guess_number-((guess_number/10)*10):
+								for my_num in my_numberList:
+									if my_num.cnt != int(cnt00):
+										other_number = my_num.mynumber
 
-							ball = 0
-							strike = 0
-							a = guess_number / 100 
-							guess_number -= a * 100
-							b = guess_number / 10 
-							guess_number -= b * 10
-							c = guess_number
-							guess_list = [a,b,c]
+								ball = 0
+								strike = 0
+								a = guess_number / 100 
+								guess_number -= a * 100
+								b = guess_number / 10 
+								guess_number -= b * 10
+								c = guess_number
+								guess_list = [a,b,c]
 	
-							e = other_number / 100
-							other_number -= e * 100
-							f = other_number / 10 
-							other_number -= f * 10
-							g = other_number
-							other_list = [e, f, g]
+								e = other_number / 100
+								other_number -= e * 100
+								f = other_number / 10 
+								other_number -= f * 10
+								g = other_number
+								other_list = [e, f, g]
 
-							for i in range(3):
-								for j in range(3):
-									if other_list[i] == guess_list[j]:
-										ball += 1
-							for i in range(3):
-								if other_list[i] == guess_list[i]:
-									ball-= 1
-									strike+= 1
+								for i in range(3):
+									for j in range(3):
+										if other_list[i] == guess_list[j]:
+											ball += 1
+								for i in range(3):
+									if other_list[i] == guess_list[i]:
+										ball-= 1
+										strike+= 1
 
-							guess_number = form_guess.cleaned_data['guess_number']
-							form_guess = Form_numberList(
-									{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
-							)
-							form_guess.save()
+								guess_number = form_guess.cleaned_data['guess_number']
+								form_guess = Form_numberList(
+										{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
+								)
+								form_guess.save()
 
-							if strike==3:
-								context = 'you win'
-								return render(request, "end.html", {'context':context} )
-							if strike <3:
-								return redirect('/game2/%d/%d/'%(int(room00), int(cnt00)))
+								if strike==3:
+									context = 'you win'
+									return render(request, "end.html", {'context':context} )
+								if strike <3:
+									return redirect('/game2/%d/%d/'%(int(room00), int(cnt00)))
 		
 		form_guess = Form_numberList()
 		return render(request,"game2.html", {"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,"form_guess":form_guess,})
