@@ -85,7 +85,7 @@ def game(request, room00, cnt00):
 	guessList1 = number_room.objects.filter(cnt = int(cnt00))
 	guessList2 = number_room.objects.filter(cnt = int(other_cnt))
 
-	j = int(room00)
+	m = int(room00)
 	k = int(cnt00)
 	
 
@@ -157,7 +157,7 @@ def game(request, room00, cnt00):
 
 								guess_number = form_guess.cleaned_data['guess_number']
 								form_guess = Form_numberList(
-										{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
+										{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':m,'cnt':k},
 								)
 								form_guess.save()
 
@@ -186,20 +186,21 @@ def game2(request, room00, cnt00):
 		for i in range(1000):
 			roomList = number_room.objects.filter(room = int(room00))
 			count_turn = len(roomList)
-			if count_turn%2 == 0:
-				if int(cnt00) < other_cnt:
+			if int(cnt00) > other_cnt:
+				if count_turn%2 == 1:
 					for room_end in roomList:
 						if room_end.strike == 3:
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
 					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
-			if count_turn%2 == 1:
-				if int(cnt00) > other_cnt:
+			if int(cnt00) < other_cnt:
+				if count_turn%2 == 0:
 					for room_end in roomList:
 						if room_end.strike == 3:
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
-					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
+					return render(request,"game3.html",{"other_cnt":other_cnt,"count_turn":count_turn,"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,})
+					#return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
 			for room_end in roomList:
 				if room_end.strike == 3:
 					context = 'you lose'

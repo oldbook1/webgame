@@ -13,11 +13,11 @@
 {% for nic in nicnameList %}
 {{nic.nicname}}vs
 {% endfor %}</br>
-{% for guess1 in form_guess1 %}
-{{guess1.guess_number}} </br>
+{% for guess1 in guessList1 %}
+{{guess1.guess_number}} | {{guess1.strike}} strike {{guess1.ball}} ball</br>
 {% endfor %}
-{% for guess2 in form_guess2 %}
-{{guess2.guess_number}} </br>
+{% for guess2 in guessList2 %}
+{{guess2.guess_number}} | {{guess2.strike}} strike {{guess2.ball}} ball</br>
 {% endfor %}
 </body>
 </html>
