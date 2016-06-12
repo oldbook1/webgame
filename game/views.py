@@ -190,6 +190,9 @@ def game2(request, room00, cnt00):
 				if count_turn%2 == 1:
 					for room_end in roomList:
 						if room_end.strike == 3:
+							nicnameList.delete()
+							my_numberList.delete()
+							roomList.delete()
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
 					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
@@ -197,11 +200,17 @@ def game2(request, room00, cnt00):
 				if count_turn%2 == 0:
 					for room_end in roomList:
 						if room_end.strike == 3:
+							nicnameList.delete()
+							my_numberList.delete()
+							roomList.delete()
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
 					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
 			for room_end in roomList:
 				if room_end.strike == 3:
+					nicnameList.delete()
+					my_numberList.delete()
+					roomList.delete()
 					context = 'you lose'
 					return render(request, "end.html", {'context':context} )
 			time.sleep(2)
