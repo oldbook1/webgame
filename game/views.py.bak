@@ -77,28 +77,35 @@ def startpage(request):
 
 def game(request, room, cnt):
 	nicnameListAll = player.objects.all()
-	my_numberListAll = player_num.objects.all()
 	nicnameList = {}
 	nicnameList = dict()
 	for nic in nicnameListAll:
 		if nic.room == room:
 			nicnameList += nic
+	for nic in nicnameList:
+		if nic.cnt != cnt:
+			other_cnt = nic.cnt
+	
+	my_numberListAll = player_num.objects.all()
 	my_numberList = {}
 	my_numberList = dict()
 	for number in my_numberListAll:
 		if number.room == room:
 			my_numberList += number
-	for nic in nicnameList:
-			if nic.cnt != cnt:
-				other_cnt = nic.cnt
 	guessList1 = {}
 	guessList2 = {}
+	guessList1 = dict()
+	guessList2 = dict()
 	i = 0
 	for numberList in my_numberList:
 		if i%2 == 0:
 			guessList1 += numberList
 		if i%2 == 1:
 			guessList2 += numberList
+		i += 1
+	j = room
+	k = cnt
+	
 
 	#mynumber input
 	if len(my_numberList) < 2:
@@ -111,7 +118,7 @@ def game(request, room, cnt):
 						if mynumber/100 != mynumber-((mynumber/10)*10):
 							if (mynumber-(mynumber/100)*100)/10 != mynumber-((mynumber/10)*10):
 								form_num = Form_mynum(
-									{'mynumber' : mynumber,'room' : room,'cnt': cnt}
+									{'mynumber' : mynumber,'room' : j,'cnt': k}
 								)	
 								form_num.save()
 								'''
@@ -123,13 +130,14 @@ def game(request, room, cnt):
 									my_numberListAll = player_num.objects.all()	
 									my_numberList = {}
 									my_numberList = dict()
+									num_cheker = 0
 									for number in my_numberListAll:
-										if number.room == room :
-											my_numberList += number
-									if len(my_numberList) > 2:
-										if cnt < other_cnt:
+										if number.room == j :
+											num_cheker += 1
+									if num_cheker == 2:
+										if k < other_cnt:
 											return render(request, "game2.html", {"nicnameList":nicnameList,"form_guess":form_guess,}) 
-										if cnt > other_cnt:
+										if k > other_cnt:
 											return redirect('/game2/%d/%d/'%(room, cnt))
 									time.sleep(2)
 
