@@ -33,11 +33,11 @@ class player_num(models.Model):
 
 
 class number_room(models.Model):
-	guess_number = models.IntegerField(null = False , default = 123, unique = True)
-	ball  = models.IntegerField(default =0 )
-	strike  = models.IntegerField(default =0)
-	room = models.IntegerField(default =0 )
-	cnt = models.IntegerField(default =0)
+	guess_number = models.IntegerField(null = False , default = 123)
+	ball  = models.IntegerField(default = 0 , null=False)
+	strike  = models.IntegerField(default = 0 , null=False)
+	room = models.IntegerField(default = 0 , null=False)
+	cnt = models.IntegerField(default = 1 , null=False)
 
 	def __unicode__(self):
 		return unicode(self.guess_number)

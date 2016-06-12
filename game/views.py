@@ -77,7 +77,6 @@ def startpage(request):
 
 def game(request, room00, cnt00):
 	nicnameList = player.objects.filter(room = int(room00))
-	m = 0
 	for nic in nicnameList:
 		if nic.cnt != int(cnt00):
 			other_cnt = nic.cnt
@@ -104,7 +103,7 @@ def game(request, room00, cnt00):
 									{'mynumber' : mynumber,'room' : room00,'cnt': cnt00},
 								)	
 								form_num.save()
-								form_guess = Form_numberList_room()
+								form_guess = Form_numberList()
 								for i in range(1000):
 									my_numberListAll = player_num.objects.filter(room = int(room00))	
 									if len(my_numberListAll) == 2:
@@ -120,7 +119,7 @@ def game(request, room00, cnt00):
 	#guess_number input
 	if len(my_numberList) == 2:
 		if request.method == "POST":
-			form_guess = Form_numberList_room(request.POST)
+			form_guess = Form_numberList(request.POST)
 			if form_guess.is_valid():
 				guess_number = form_guess.cleaned_data['guess_number']
 				for my_num in my_numberList:
@@ -153,7 +152,7 @@ def game(request, room00, cnt00):
 						strike+= 1
 
 				guess_number = form_guess.cleaned_data['guess_number']
-				form_guess = Form_numberList_room(
+				form_guess = Form_numberList(
 						{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
 				)
 				form_guess.save()
@@ -164,9 +163,9 @@ def game(request, room00, cnt00):
 				if strike <3:
 					return redirect('/game2/%d/%d/'%(int(room00), int(cnt00)))
 	
-		form_guess = Form_numberList_room()
+		form_guess = Form_numberList()
 		return render(request,"game2.html", {"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,"form_guess":form_guess,})
-	form_guess = Form_numberList_room()
+	form_guess = Form_numberList()
 	return render(request,"game2.html", {"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,"form_guess":form_guess,})
 
 

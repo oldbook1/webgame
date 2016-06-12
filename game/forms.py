@@ -37,7 +37,7 @@ class Form_mynum(forms.ModelForm):
 		return cnt
 
 
-class Form_numberList_room(forms.ModelForm):
+class Form_numberList(forms.ModelForm):
 	class Meta:
 		model = number_room
 		fields = ['guess_number','ball','strike','room','cnt']
