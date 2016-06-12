@@ -5,10 +5,10 @@
 	<title>write</title>
 </head>
 <body>
+<h1> push button and wait for other player end turn<h1>
 <form method='POST' action=''>
-{{form_guess.as_p}}
 {% csrf_token %}
-<input type='submit' value='input'/input>
+<input type='submit' value='button'/input>
 </form>
 {% for nic in nicnameList %}
 {{nic.nicname}}vs
@@ -16,7 +16,7 @@
 {% for guess1 in guessList1 %}
 {{guess1.guess_number}} | {{guess1.strike}} strike {{guess1.ball}} ball</br>
 {% endfor %}
-{% for guess2 in guessList2 %}
+{% for guess2 in formList2 %}
 {{guess2.guess_number}} | {{guess2.strike}} strike {{guess2.ball}} ball</br>
 {% endfor %}
 </body>

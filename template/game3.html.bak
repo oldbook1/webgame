@@ -5,10 +5,10 @@
 	<title>write</title>
 </head>
 <body>
+<h1> push button and wait for other player end turn<h1>
 <form method='POST' action=''>
-{{form_guess.as_p}}
 {% csrf_token %}
-<input type='submit' value='input'/input>
+<input type='submit' value='button'/input>
 </form>
 {% for nic in nicnameList %}
 {{nic.nicname}}vs
