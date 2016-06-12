@@ -33,7 +33,7 @@ def startpage(request):
 						break
 					room_cheker = 0
 				form = Form(
-					{'nicname' : nicname,'room' : room,'cnt': cnt,},
+					{'nicname' : nicname,'room' : i,'cnt': cnt,},
 				)
 				form.save()
 				for i in range(1000):  
@@ -49,7 +49,7 @@ def startpage(request):
 					time.sleep(2)
 			#room matching
 			if room != 0:
-				if room < 11 : # room>0
+				if 0< room < 11 :
 					nicnameList = player.objects.all() 
 					room_cheker = 0
 					cnt = len(nicnameList) + 1 
@@ -75,36 +75,19 @@ def startpage(request):
 	return render(request,"home.html",{ "form":form, })
 
 
-def game(request, room, cnt):
-	nicnameListAll = player.objects.all()
-	nicnameList = {}
-	nicnameList = dict()
-	for nic in nicnameListAll:
-		if nic.room == room:
-			nicnameList += nic
+def game(request, room00, cnt00):
+	nicnameList = player.objects.filter(room = int(room00))
+	m = 0
 	for nic in nicnameList:
-		if nic.cnt != cnt:
+		if nic.cnt != int(cnt00):
 			other_cnt = nic.cnt
 	
-	my_numberListAll = player_num.objects.all()
-	my_numberList = {}
-	my_numberList = dict()
-	for number in my_numberListAll:
-		if number.room == room:
-			my_numberList += number
-	guessList1 = {}
-	guessList2 = {}
-	guessList1 = dict()
-	guessList2 = dict()
-	i = 0
-	for numberList in my_numberList:
-		if i%2 == 0:
-			guessList1 += numberList
-		if i%2 == 1:
-			guessList2 += numberList
-		i += 1
-	j = room
-	k = cnt
+	my_numberList = player_num.objects.filter(room = int(room00))
+	guessList1 = number_room.objects.filter(cnt = int(cnt00))
+	guessList2 = number_room.objects.filter(cnt = int(other_cnt))
+
+	j = int(room00)
+	k = int(cnt00)
 	
 
 	#mynumber input
@@ -118,27 +101,17 @@ def game(request, room, cnt):
 						if mynumber/100 != mynumber-((mynumber/10)*10):
 							if (mynumber-(mynumber/100)*100)/10 != mynumber-((mynumber/10)*10):
 								form_num = Form_mynum(
-									{'mynumber' : mynumber,'room' : j,'cnt': k}
+									{'mynumber' : mynumber,'room' : room00,'cnt': cnt00},
 								)	
 								form_num.save()
-								'''
-								oomList = number_room.objects.all()		
-								count_turn = len(roomList)
-								'''
 								form_guess = Form_numberList_room()
 								for i in range(1000):
-									my_numberListAll = player_num.objects.all()	
-									my_numberList = {}
-									my_numberList = dict()
-									num_cheker = 0
-									for number in my_numberListAll:
-										if number.room == j :
-											num_cheker += 1
-									if num_cheker == 2:
+									my_numberListAll = player_num.objects.filter(room = int(room00))	
+									if len(my_numberListAll) == 2:
 										if k < other_cnt:
 											return render(request, "game2.html", {"nicnameList":nicnameList,"form_guess":form_guess,}) 
 										if k > other_cnt:
-											return redirect('/game2/%d/%d/'%(room, cnt))
+											return redirect('/game2/%d/%d/'%(int(room00), int(cnt00)))
 									time.sleep(2)
 
 		form_num = Form_mynum()
@@ -169,7 +142,7 @@ def game(request, room, cnt):
 			if form_guess.is_vaild():
 				guess_number = form_guess.cleanead_data['guess_number']
 				for my_num in my_numberList:
-					if my_num.cnt != cnt:
+					if my_num.cnt != int(cnt00):
 						other_number = my_num.mynumber
 
 				ball = 0
@@ -199,7 +172,7 @@ def game(request, room, cnt):
 
 				guess_number = form_guess.cleanead_data['guess_number']
 				form_guess = Form_numberList_room(
-						{'guess_number' : guess_number,'ball' : ball, 'strike':strike},
+						{'guess_number' : guess_number,'ball' : ball, 'strike':strike,'room':j,'cnt':k},
 				)
 				form_guess.save()
 
@@ -207,7 +180,7 @@ def game(request, room, cnt):
 					context = 'you win'
 					return render(request, "end.html", {'context':context} )
 				if strike <3:
-					return redirect('/game2/%d/%d/'%(room, cnt))
+					return redirect('/game2/%d/%d/'%(int(room00), int(cnt00)))
 	
 		form_guess = Form_numberList_room()
 		return render(request,"game2.html", {"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,"form_guess":form_guess,})
@@ -215,49 +188,33 @@ def game(request, room, cnt):
 	return render(request,"game2.html", {"nicnameList":nicnameList,"guessList1":guessList1,'guessList2':guessList2,"form_guess":form_guess,})
 
 
-def game2(request, room, cnt):
-	nicnameListAll = player.objects.all()
-	my_numberListAll = player_num.objects.all()
-	nicnameList = {}
-	nicnameList = dict()
-	for nic in nicnameListAll:
-		if nic.room == room:
-			nicnameList += nic
+def game2(request, room00, cnt00):
+	nicnameList = player.objects.filter(room = int(room00))
+	my_numberList = player_num.objects.filter(room = int(room00))
 	for nic in nicnameList:
-			if nic.cnt != cnt:
-				other_cnt = nic.cnt
-	my_numberList = {}
-	my_numberList = dict()
-	for number in my_numberListAll:
-		if number.room == room:
-			my_numberList += number
-	guessList1 = {}
-	guessList2 = {}
-	i = 0
-	for numberList in my_numberList:
-		if i%2 == 0:
-			guessList1 += numberList
-		if i%2 == 1:
-			guessList2 += numberList
+		if nic.cnt != int(cnt00):
+			other_cnt = nic.cnt
+	guessList1 = number_room.objects.filter(cnt = int(cnt00))
+	guessList2 = number_room.objects.filter(cnt = int(other_cnt))
 
 	if request.method == "POST":
 		for i in range(1000):
-			roomList = number_room.objects.all()
+			roomList = number_room.objects.filter(room = int(room00))
 			count_turn = len(roomList)
 			if count_turn%2 == 0:
-				if cnt < other_cnt:
+				if int(cnt00) < other_cnt:
 					for room_end in roomList:
 						if room_end.strike == 3:
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
-					return redirect('/game/%d/%d/'%(room, cnt))
+					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
 			if count_turn%2 == 1:
-				if cnt > other_cnt:
+				if int(cnt00) > other_cnt:
 					for room_end in roomList:
 						if room_end.strike == 3:
 							context = 'you lose'
 							return render(request, "end.html", {'context':context})
-					return redirect('/game/%d/%d/'%(room, cnt))
+					return redirect('/game/%d/%d/'%(int(room00), int(cnt00)))
 			for room_end in roomList:
 				if room_end.strike == 3:
 					context = 'you lose'

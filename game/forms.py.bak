@@ -37,10 +37,10 @@ class Form_mynum(forms.ModelForm):
 		return cnt
 
 
-class Form_numberList_room1(forms.ModelForm):
+class Form_numberList_room(forms.ModelForm):
 	class Meta:
-		model = number_room1
-		fields = ['guess_number','ball','strike']
+		model = number_room
+		fields = ['guess_number','ball','strike','room','cnt']
 	
 	def clean_guess_number(self):
 		guess_number = self.cleaned_data.get('guess_number')

@@ -40,7 +40,7 @@ class Form_mynum(forms.ModelForm):
 class Form_numberList_room(forms.ModelForm):
 	class Meta:
 		model = number_room
-		fields = ['guess_number','ball','strike']
+		fields = ['guess_number','ball','strike','room','cnt']
 	
 	def clean_guess_number(self):
 		guess_number = self.cleaned_data.get('guess_number')
@@ -53,3 +53,11 @@ class Form_numberList_room(forms.ModelForm):
 	def clean_strike(self):
 		strike = self.cleaned_data.get('strike')
 		return strike
+
+	def clean_room(self):
+		room = self.cleaned_data.get('room')
+		return room
+
+	def clean_cnt(self):
+		cnt = self.cleaned_data.get('cnt')
+		return cnt
